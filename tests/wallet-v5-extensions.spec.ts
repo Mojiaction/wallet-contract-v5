@@ -430,8 +430,8 @@ describe('Wallet V5 extensions auth', () => {
             value: forwardValue
         });
 
-        const fee = receipt2.transactions[2].totalFees.coins;
-        const receiverBalanceAfter = (await blockchain.getContract(testReceiver)).balance;
+         fee = receipt2.transactions[2].totalFees.coins;
+         receiverBalanceAfter = (await blockchain.getContract(testReceiver)).balance;
         expect(receiverBalanceAfter).toEqual(receiverBalanceBefore + forwardValue - fee);
     });
 
@@ -443,10 +443,10 @@ describe('Wallet V5 extensions auth', () => {
             ]))
         });
 
-        const isSignatureAuthAllowed = await walletV5.getIsSignatureAuthAllowed();
+        isSignatureAuthAllowed = await walletV5.getIsSignatureAuthAllowed();
         expect(isSignatureAuthAllowed).toEqual(-1);
 
-        const receipt0 = await walletV5.sendInternalMessageFromExtension(sender, {
+         receipt0 = await walletV5.sendInternalMessageFromExtension(sender, {
             value: toNano('0.1'),
             body: packActionsList([
                 new ActionSetSignatureAuthAllowed(false)
@@ -463,10 +463,10 @@ describe('Wallet V5 extensions auth', () => {
             ).exitCode
         ).toEqual(0);
 
-        const isSignatureAuthAllowed0 = await walletV5.getIsSignatureAuthAllowed();
+         isSignatureAuthAllowed0 = await walletV5.getIsSignatureAuthAllowed();
         expect(isSignatureAuthAllowed0).toEqual(0);
 
-        const receipt = await walletV5.sendInternalMessageFromExtension(sender, {
+         receipt = await walletV5.sendInternalMessageFromExtension(sender, {
             value: toNano('0.1'),
             body: packActionsList([
                 new ActionSetSignatureAuthAllowed(true),
@@ -484,24 +484,24 @@ describe('Wallet V5 extensions auth', () => {
             ).exitCode
         ).toEqual(0);
 
-        const isSignatureAuthAllowed1 = await walletV5.getIsSignatureAuthAllowed();
+     isSignatureAuthAllowed1 = await walletV5.getIsSignatureAuthAllowed();
         expect(isSignatureAuthAllowed1).toEqual(-1);
 
-        const contract_seqno = await walletV5.getSeqno();
+         contract_seqno = await walletV5.getSeqno();
         expect(contract_seqno).toEqual(seqno);
 
-        const testReceiver = Address.parse('EQAvDfWFG0oYX19jwNDNBBL1rKNT9XfaGP9HyTb5nb2Eml6y');
-        const forwardValue = toNano(0.001);
+         testReceiver = Address.parse('EQAvDfWFG0oYX19jwNDNBBL1rKNT9XfaGP9HyTb5nb2Eml6y');
+         forwardValue = toNano(0.001);
 
-        const receiverBalanceBefore = (await blockchain.getContract(testReceiver)).balance;
+         receiverBalanceBefore = (await blockchain.getContract(testReceiver)).balance;
 
-        const msg = createMsgInternal({ dest: testReceiver, value: forwardValue });
+        msg = createMsgInternal({ dest: testReceiver, value: forwardValue });
 
-        const actionsList2 = packActionsList([
+         actionsList2 = packActionsList([
             new ActionSendMsg(SendMode.PAY_GAS_SEPARATELY, msg)
         ]);
 
-        const receipt2 = await walletV5.sendInternal(sender, {
+         receipt2 = await walletV5.sendInternal(sender, {
             sendMode: SendMode.PAY_GAS_SEPARATELY,
             value: toNano(0.1),
             body: createBody(actionsList2)
@@ -516,8 +516,8 @@ describe('Wallet V5 extensions auth', () => {
             value: forwardValue
         });
 
-        const fee = receipt2.transactions[2].totalFees.coins;
-        const receiverBalanceAfter = (await blockchain.getContract(testReceiver)).balance;
+         fee = receipt2.transactions[2].totalFees.coins;
+         receiverBalanceAfter = (await blockchain.getContract(testReceiver)).balance;
         expect(receiverBalanceAfter).toEqual(receiverBalanceBefore + forwardValue - fee);
     });
 });
